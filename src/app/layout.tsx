@@ -1,6 +1,5 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
-
 import type { Metadata } from "next";
 import { ActiveLink } from "./activeLink";
 
@@ -28,8 +27,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 						</ul>
 					</nav>
 				</header>
-
-				{children}
+				<main className="flex min-h-screen items-center justify-center">{children}</main>
 			</body>
 		</html>
 	);
