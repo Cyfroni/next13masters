@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { getProducts, type Product } from "@/app/api";
 
 function Product({ product }: { product: Product }) {
@@ -8,7 +9,7 @@ function Product({ product }: { product: Product }) {
 				href={`/product/${product.id}`}
 				className="flex flex-col items-center justify-center rounded-md p-5 transition hover:scale-105 hover:bg-slate-200 hover:shadow-xl"
 			>
-				<img className="h-48 w-48" src={product.image} alt={product.title} />
+				<Image width={150} height={150} src={product.image} alt={product.title} />
 				<h3 className="text-xl font-bold">{product.title}</h3>
 				<p className="text-gray-500">{product.description}</p>
 				<p className="text-gray-500">{product.price}$</p>
