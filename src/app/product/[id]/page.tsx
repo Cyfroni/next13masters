@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { executeGraphql } from "@/app/api/grapgql";
+import { executeGraphql } from "@/api/grapgql";
 import { ProductGetByIdDocument } from "@/gql/graphql";
 
 // export async function generateMetadata({ params }: { params: { id: string } }) {

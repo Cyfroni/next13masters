@@ -15,6 +15,16 @@ const nextConfig = {
 	experimental: {
 		typedRoutes: true,
 	},
+
+	redirects: async () => {
+		return [
+			{
+				source: "/categories/t-shirts",
+				destination: "/categories/t-shirts/1",
+				permanent: false,
+			},
+		];
+	},
 };
 
 module.exports = nextConfig;

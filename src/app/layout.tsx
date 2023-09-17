@@ -1,7 +1,7 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
 import type { Metadata } from "next";
-import { ActiveLink } from "./activeLink";
+import { ActiveLink } from "../components/activeLink";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,6 +23,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
 							<li>
 								<ActiveLink href="/products">All</ActiveLink>
+							</li>
+							<li>
+								<ActiveLink href="/categories/t-shirts/1">T-Shirts</ActiveLink>
+							</li>
+							<li>
+								<ActiveLink href="/categories/qwe/1">???</ActiveLink>
 							</li>
 						</ul>
 					</nav>

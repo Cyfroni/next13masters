@@ -17,9 +17,9 @@ query ProductsGetList($skip: Int!) {
 	}
 }
 
-query ProductsGetListByCategory($name: String!) {
-	categories(where: { name: $name }) {
-		products {
+query ProductsGetListByCategory($slug: String!, $skip: Int!) {
+	categories(where: { slug: $slug }) {
+		products(first: 2, skip: $skip) {
 			...ProductListItem
 		}
 	}
