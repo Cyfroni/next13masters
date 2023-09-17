@@ -7,7 +7,7 @@ const config: CodegenConfig = {
 	schema: process.env.GRAPHQL_URL,
 	overwrite: true,
 	ignoreNoDocuments: true,
-	documents: "src/**/*.tsx",
+	documents: ["src/**/*.graphql"],
 	generates: {
 		"src/gql/": {
 			preset: "client",

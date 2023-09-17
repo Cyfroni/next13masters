@@ -14,13 +14,13 @@ import * as types from './graphql';
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "\n\tquery ProductGetById($id: ID!) {\n\t\tproduct(where: { id: $id }) {\n\t\t\tid\n\t\t\tname\n\t\t\tdescription\n\t\t\tcategories(first: 1) {\n\t\t\t\tname\n\t\t\t}\n\t\t\timages(first: 1) {\n\t\t\t\turl\n\t\t\t}\n\t\t\tprice\n\t\t}\n\t}\n": types.ProductGetByIdDocument,
+    "fragment ProductListItem on Product {\n  id\n  name\n  description\n  categories(first: 1) {\n    name\n  }\n  images(first: 1) {\n    url\n  }\n  price\n}\n\nquery ProductsGetList($skip: Int!) {\n  products(first: 4, skip: $skip) {\n    ...ProductListItem\n  }\n}\n\nquery ProductsGetListByCategory($name: String!) {\n  categories(where: {name: $name}) {\n    products {\n      ...ProductListItem\n    }\n  }\n}\n\nquery ProductGetById($id: ID!) {\n  product(where: {id: $id}) {\n    ...ProductListItem\n  }\n}": types.ProductListItemFragmentDoc,
 };
 
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n\tquery ProductGetById($id: ID!) {\n\t\tproduct(where: { id: $id }) {\n\t\t\tid\n\t\t\tname\n\t\t\tdescription\n\t\t\tcategories(first: 1) {\n\t\t\t\tname\n\t\t\t}\n\t\t\timages(first: 1) {\n\t\t\t\turl\n\t\t\t}\n\t\t\tprice\n\t\t}\n\t}\n"): typeof import('./graphql').ProductGetByIdDocument;
+export function graphql(source: "fragment ProductListItem on Product {\n  id\n  name\n  description\n  categories(first: 1) {\n    name\n  }\n  images(first: 1) {\n    url\n  }\n  price\n}\n\nquery ProductsGetList($skip: Int!) {\n  products(first: 4, skip: $skip) {\n    ...ProductListItem\n  }\n}\n\nquery ProductsGetListByCategory($name: String!) {\n  categories(where: {name: $name}) {\n    products {\n      ...ProductListItem\n    }\n  }\n}\n\nquery ProductGetById($id: ID!) {\n  product(where: {id: $id}) {\n    ...ProductListItem\n  }\n}"): typeof import('./graphql').ProductListItemFragmentDoc;
 
 
 export function graphql(source: string) {

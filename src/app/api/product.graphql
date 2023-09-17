@@ -1,0 +1,32 @@
+fragment ProductListItem on Product {
+	id
+	name
+	description
+	categories(first: 1) {
+		name
+	}
+	images(first: 1) {
+		url
+	}
+	price
+}
+
+query ProductsGetList($skip: Int!) {
+	products(first: 4, skip: $skip) {
+		...ProductListItem
+	}
+}
+
+query ProductsGetListByCategory($name: String!) {
+	categories(where: { name: $name }) {
+		products {
+			...ProductListItem
+		}
+	}
+}
+
+query ProductGetById($id: ID!) {
+	product(where: { id: $id }) {
+		...ProductListItem
+	}
+}

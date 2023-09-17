@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { graphql } from "@/gql";
-import { executeGraphql } from "@/app/grapgql";
+import { executeGraphql } from "@/app/api/grapgql";
+import { ProductGetByIdDocument } from "@/gql/graphql";
 
 // export async function generateMetadata({ params }: { params: { id: string } }) {
 // 	const product = await getProductById(params.id);
@@ -11,25 +11,8 @@ import { executeGraphql } from "@/app/grapgql";
 // 	};
 // }
 
-const getProductById = graphql(/* GraphQL */ `
-	query ProductGetById($id: ID!) {
-		product(where: { id: $id }) {
-			id
-			name
-			description
-			categories(first: 1) {
-				name
-			}
-			images(first: 1) {
-				url
-			}
-			price
-		}
-	}
-`);
-
 export default async function Page({ params }: { params: { id: string } }) {
-	const { product } = await executeGraphql(getProductById, { id: params.id });
+	const { product } = await executeGraphql(ProductGetByIdDocument, { id: params.id });
 
 	if (!product) {
 		return notFound();
