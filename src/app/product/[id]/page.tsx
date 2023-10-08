@@ -3,13 +3,13 @@ import { notFound } from "next/navigation";
 import { executeGraphql } from "@/api/grapgql";
 import { ProductGetByIdDocument } from "@/gql/graphql";
 
-// export async function generateMetadata({ params }: { params: { id: string } }) {
-// 	const product = await getProductById(params.id);
+export async function generateMetadata({ params }: { params: { id: string } }) {
+	const { product } = await executeGraphql(ProductGetByIdDocument, { id: params.id });
 
-// 	return {
-// 		title: product.title,
-// 	};
-// }
+	return {
+		title: product?.name,
+	};
+}
 
 export default async function Page({ params }: { params: { id: string } }) {
 	const { product } = await executeGraphql(ProductGetByIdDocument, { id: params.id });
