@@ -4,6 +4,7 @@ import { ProductsGetListDocument } from "@/gql/graphql";
 
 export default async function Page({ params }: { params: { page: string } }) {
 	const { products } = await executeGraphql(ProductsGetListDocument, {
+		first: 4,
 		skip: parseInt(params.page) * 4,
 	});
 

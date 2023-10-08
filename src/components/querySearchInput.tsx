@@ -12,8 +12,6 @@ export function QuerySeachInput() {
 	useEffect(() => {
 		const timer = setTimeout(() => {
 			if (isFocused) {
-				// const url = value ? (`/search?query=${value}` as const) : "/";
-				// router.push(url);
 				router.push(`/search?query=${value}`);
 			}
 		}, 500);

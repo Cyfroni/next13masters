@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
-// import { Suspense } from "react";
+import { Suspense } from "react";
 import { executeGraphql } from "@/api/grapgql";
 import { ProductGetByIdDocument, ProductsGetListDocument } from "@/gql/graphql";
 import { Product } from "@/components/product";
@@ -11,6 +11,14 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
 	return {
 		title: product?.name,
 	};
+}
+
+export async function generateStaticParams() {
+	const { products } = await executeGraphql(ProductsGetListDocument, {});
+
+	return products.map((product) => ({
+		params: { id: product.id },
+	}));
 }
 
 export default async function Page({ params }: { params: { id: string } }) {
@@ -31,15 +39,15 @@ export default async function Page({ params }: { params: { id: string } }) {
 					<p className="mt-2 text-gray-500">{product.description}</p>
 				</div>
 			</article>
-			{/* <Suspense fallback={<div>Loading...</div>}> */}
-			<RelatedProducts />
-			{/* </Suspense> */}
+			<Suspense fallback={<div>Loading...</div>}>
+				<RelatedProducts />
+			</Suspense>
 		</div>
 	);
 }
 
 async function RelatedProducts() {
-	const { products } = await executeGraphql(ProductsGetListDocument, { skip: 0 });
+	const { products } = await executeGraphql(ProductsGetListDocument, { first: 4 });
 
 	return (
 		<div className="flex items-center justify-center">

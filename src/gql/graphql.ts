@@ -10730,7 +10730,8 @@ export type CollectionGetBySlugQuery = { collections: Array<{ id: string, name: 
 export type ProductListItemFragment = { id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> };
 
 export type ProductsGetListQueryVariables = Exact<{
-  skip: Scalars['Int']['input'];
+  first?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
@@ -10820,8 +10821,8 @@ export const CollectionGetBySlugDocument = new TypedDocumentString(`
   price
 }`) as unknown as TypedDocumentString<CollectionGetBySlugQuery, CollectionGetBySlugQueryVariables>;
 export const ProductsGetListDocument = new TypedDocumentString(`
-    query ProductsGetList($skip: Int!) {
-  products(first: 4, skip: $skip) {
+    query ProductsGetList($first: Int, $skip: Int) {
+  products(first: $first, skip: $skip) {
     ...ProductListItem
   }
 }

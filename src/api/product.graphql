@@ -11,8 +11,8 @@ fragment ProductListItem on Product {
 	price
 }
 
-query ProductsGetList($skip: Int!) {
-	products(first: 4, skip: $skip) {
+query ProductsGetList($first: Int, $skip: Int) {
+	products(first: $first, skip: $skip) {
 		...ProductListItem
 	}
 }
