@@ -10725,7 +10725,7 @@ export type CollectionGetByIdQueryVariables = Exact<{
 }>;
 
 
-export type CollectionGetByIdQuery = { collection?: { id: string, name: string, slug: string, description?: string | null } | null };
+export type CollectionGetByIdQuery = { collection?: { id: string, name: string, slug: string, description?: string | null, products: Array<{ id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> }> } | null };
 
 export type ProductListItemFragment = { id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> };
 
@@ -10795,9 +10795,23 @@ export const CollectionGetByIdDocument = new TypedDocumentString(`
     name
     slug
     description
+    products {
+      ...ProductListItem
+    }
   }
 }
-    `) as unknown as TypedDocumentString<CollectionGetByIdQuery, CollectionGetByIdQueryVariables>;
+    fragment ProductListItem on Product {
+  id
+  name
+  description
+  categories(first: 1) {
+    name
+  }
+  images(first: 1) {
+    url
+  }
+  price
+}`) as unknown as TypedDocumentString<CollectionGetByIdQuery, CollectionGetByIdQueryVariables>;
 export const ProductsGetListDocument = new TypedDocumentString(`
     query ProductsGetList($skip: Int!) {
   products(first: 4, skip: $skip) {

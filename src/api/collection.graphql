@@ -12,5 +12,8 @@ query CollectionGetById($id: ID!) {
 		name
 		slug
 		description
+		products {
+			...ProductListItem
+		}
 	}
 }
