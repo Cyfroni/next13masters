@@ -1,0 +1,16 @@
+query CollectionGetList {
+	collections {
+		id
+		name
+		slug
+	}
+}
+
+query CollectionGetById($id: ID!) {
+	collection(where: { id: $id }) {
+		id
+		name
+		slug
+		description
+	}
+}

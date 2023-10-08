@@ -10715,6 +10715,18 @@ export type _SystemDateTimeFieldVariation =
   | 'combined'
   | 'localization';
 
+export type CollectionGetListQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type CollectionGetListQuery = { collections: Array<{ id: string, name: string, slug: string }> };
+
+export type CollectionGetByIdQueryVariables = Exact<{
+  id: Scalars['ID']['input'];
+}>;
+
+
+export type CollectionGetByIdQuery = { collection?: { id: string, name: string, slug: string, description?: string | null } | null };
+
 export type ProductListItemFragment = { id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> };
 
 export type ProductsGetListQueryVariables = Exact<{
@@ -10767,6 +10779,25 @@ export const ProductListItemFragmentDoc = new TypedDocumentString(`
   price
 }
     `, {"fragmentName":"ProductListItem"}) as unknown as TypedDocumentString<ProductListItemFragment, unknown>;
+export const CollectionGetListDocument = new TypedDocumentString(`
+    query CollectionGetList {
+  collections {
+    id
+    name
+    slug
+  }
+}
+    `) as unknown as TypedDocumentString<CollectionGetListQuery, CollectionGetListQueryVariables>;
+export const CollectionGetByIdDocument = new TypedDocumentString(`
+    query CollectionGetById($id: ID!) {
+  collection(where: {id: $id}) {
+    id
+    name
+    slug
+    description
+  }
+}
+    `) as unknown as TypedDocumentString<CollectionGetByIdQuery, CollectionGetByIdQueryVariables>;
 export const ProductsGetListDocument = new TypedDocumentString(`
     query ProductsGetList($skip: Int!) {
   products(first: 4, skip: $skip) {

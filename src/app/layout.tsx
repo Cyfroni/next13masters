@@ -25,10 +25,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 								<ActiveLink href="/products">All</ActiveLink>
 							</li>
 							<li>
+								<ActiveLink href="/collections/ckdu452ug0gxm0158pysyubmr">Summer Vibes</ActiveLink>
+							</li>
+							<li>
 								<ActiveLink href="/categories/t-shirts/1">T-Shirts</ActiveLink>
 							</li>
 							<li>
-								<ActiveLink href="/categories/qwe/1">???</ActiveLink>
+								<ActiveLink href="/categories/accessories/1">Accessories</ActiveLink>
 							</li>
 						</ul>
 					</nav>

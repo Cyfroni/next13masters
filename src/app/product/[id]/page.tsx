@@ -23,8 +23,9 @@ export default async function Page({ params }: { params: { id: string } }) {
 			<Image width={320} height={320} src={product?.images[0].url} alt={product.name} />
 			<div>
 				<h1 className="text-xl font-bold">{product.name}</h1>
-				<p className="text-gray-500">{product.description}</p>
+				<p className="text-gray-500">{product.categories[0].name}</p>
 				<p className="text-gray-500">{product.price}$</p>
+				<p className="mt-2 text-gray-500">{product.description}</p>
 			</div>
 		</article>
 	);

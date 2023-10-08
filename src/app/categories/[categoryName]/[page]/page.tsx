@@ -14,5 +14,9 @@ export default async function Page({
 
 	const products = categories[0]?.products;
 
-	return <ul>{products?.map((product) => <Product key={product.id} product={product} />)}</ul>;
+	return (
+		<ul data-testid="products-list">
+			{products?.map((product) => <Product key={product.id} product={product} />)}
+		</ul>
+	);
 }

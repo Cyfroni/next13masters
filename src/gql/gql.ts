@@ -14,9 +14,14 @@ import * as types from './graphql';
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
+    "query CollectionGetList {\n  collections {\n    id\n    name\n    slug\n  }\n}\n\nquery CollectionGetById($id: ID!) {\n  collection(where: {id: $id}) {\n    id\n    name\n    slug\n    description\n  }\n}": types.CollectionGetListDocument,
     "fragment ProductListItem on Product {\n  id\n  name\n  description\n  categories(first: 1) {\n    name\n  }\n  images(first: 1) {\n    url\n  }\n  price\n}\n\nquery ProductsGetList($skip: Int!) {\n  products(first: 4, skip: $skip) {\n    ...ProductListItem\n  }\n}\n\nquery ProductsGetListByCategory($slug: String!, $skip: Int!) {\n  categories(where: {slug: $slug}) {\n    products(first: 2, skip: $skip) {\n      ...ProductListItem\n    }\n  }\n}\n\nquery ProductGetById($id: ID!) {\n  product(where: {id: $id}) {\n    ...ProductListItem\n  }\n}": types.ProductListItemFragmentDoc,
 };
 
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query CollectionGetList {\n  collections {\n    id\n    name\n    slug\n  }\n}\n\nquery CollectionGetById($id: ID!) {\n  collection(where: {id: $id}) {\n    id\n    name\n    slug\n    description\n  }\n}"): typeof import('./graphql').CollectionGetListDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
