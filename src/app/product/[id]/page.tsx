@@ -2,7 +2,11 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { executeGraphql } from "@/api/grapgql";
-import { ProductGetByIdDocument, ProductsGetListDocument } from "@/gql/graphql";
+import {
+	ProductGetByIdDocument,
+	ProductsGetListDocument,
+	VariantsGetForProductDocument,
+} from "@/gql/graphql";
 import { Product } from "@/components/product";
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
@@ -28,6 +32,10 @@ export default async function Page({ params }: { params: { id: string } }) {
 		return notFound();
 	}
 
+	const { productSizeColorVariants } = await executeGraphql(VariantsGetForProductDocument, {
+		id: params.id,
+	});
+
 	return (
 		<div className="max-w-3xl">
 			<article className="flex max-w-3xl">
@@ -37,6 +45,13 @@ export default async function Page({ params }: { params: { id: string } }) {
 					<p className="text-gray-500">{product.categories[0].name}</p>
 					<p className="text-gray-500">{product.price}$</p>
 					<p className="mt-2 text-gray-500">{product.description}</p>
+					<select>
+						{productSizeColorVariants.map((variant) => (
+							<option key={variant.id} value={variant.id}>
+								{variant.size} {variant.color}
+							</option>
+						))}
+					</select>
 				</div>
 			</article>
 			<Suspense fallback={<div>Loading...</div>}>
@@ -50,7 +65,7 @@ async function RelatedProducts() {
 	const { products } = await executeGraphql(ProductsGetListDocument, { first: 4 });
 
 	return (
-		<div className="flex items-center justify-center">
+		<aside className="flex items-center justify-center">
 			<h2 className="text-2xl font-bold">Related Products</h2>
 			<div className="flex w-full flex-wrap justify-center">
 				<ul data-testid="related-products" className="m-5 grid grid-cols-4 gap-5">
@@ -59,6 +74,6 @@ async function RelatedProducts() {
 					))}
 				</ul>
 			</div>
-		</div>
+		</aside>
 	);
 }

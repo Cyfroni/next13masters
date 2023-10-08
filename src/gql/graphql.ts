@@ -10759,6 +10759,13 @@ export type ProductGetByQueryQueryVariables = Exact<{
 
 export type ProductGetByQueryQuery = { products: Array<{ id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> }> };
 
+export type VariantsGetForProductQueryVariables = Exact<{
+  id: Scalars['ID']['input'];
+}>;
+
+
+export type VariantsGetForProductQuery = { productSizeColorVariants: Array<{ color: ProductColor, size: ProductSize, id: string }> };
+
 export class TypedDocumentString<TResult, TVariables>
   extends String
   implements DocumentTypeDecoration<TResult, TVariables>
@@ -10894,3 +10901,12 @@ export const ProductGetByQueryDocument = new TypedDocumentString(`
   }
   price
 }`) as unknown as TypedDocumentString<ProductGetByQueryQuery, ProductGetByQueryQueryVariables>;
+export const VariantsGetForProductDocument = new TypedDocumentString(`
+    query VariantsGetForProduct($id: ID!) {
+  productSizeColorVariants(where: {product: {id: $id}}) {
+    color
+    size
+    id
+  }
+}
+    `) as unknown as TypedDocumentString<VariantsGetForProductQuery, VariantsGetForProductQueryVariables>;
