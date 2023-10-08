@@ -2,6 +2,7 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import type { Metadata } from "next";
 import { ActiveLink } from "../components/activeLink";
+import { QuerySeachInput } from "@/components/querySearchInput";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,27 +15,29 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 	return (
 		<html lang="en">
 			<body className={inter.className}>
-				<header>
+				<header className="flex bg-teal-400 px-72">
 					<nav>
-						<ul className="flex justify-center gap-5 bg-cyan-300 p-5">
-							<li>
+						<ul className="flex">
+							<li className="p-5 transition-colors hover:bg-teal-300">
 								<ActiveLink href="/">Home</ActiveLink>
 							</li>
-
-							<li>
+							<li className="p-5 transition-colors hover:bg-teal-300">
 								<ActiveLink href="/products">All</ActiveLink>
 							</li>
-							<li>
-								<ActiveLink href="/collections/ckdu452ug0gxm0158pysyubmr">Summer Vibes</ActiveLink>
+							<li className="p-5 transition-colors hover:bg-teal-300">
+								<ActiveLink href="/collections/summer-vibes">Summer Vibes</ActiveLink>
 							</li>
-							<li>
+							<li className="p-5 transition-colors hover:bg-teal-300">
 								<ActiveLink href="/categories/t-shirts/1">T-Shirts</ActiveLink>
 							</li>
-							<li>
+							<li className="p-5 transition-colors hover:bg-teal-300">
 								<ActiveLink href="/categories/accessories/1">Accessories</ActiveLink>
 							</li>
 						</ul>
 					</nav>
+					<div className="ml-auto flex items-center">
+						<QuerySeachInput />
+					</div>
 				</header>
 				<main className="flex min-h-screen items-center justify-center">{children}</main>
 			</body>

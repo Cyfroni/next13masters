@@ -30,3 +30,9 @@ query ProductGetById($id: ID!) {
 		...ProductListItem
 	}
 }
+
+query ProductGetByQuery($query: String!) {
+	products(where: { name_contains: $query }) {
+		...ProductListItem
+	}
+}
