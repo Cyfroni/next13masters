@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { Suspense } from "react";
+// import { Suspense } from "react";
 import { executeGraphql } from "@/api/grapgql";
 import { ProductGetByIdDocument, ProductsGetListDocument } from "@/gql/graphql";
 import { Product } from "@/components/product";
