@@ -25,7 +25,6 @@ export function QuerySeachInput() {
 		<input
 			ref={ref}
 			type="search"
-			role="searchbox"
 			placeholder="Search"
 			value={value}
 			onChange={(e) => setValue(e.target.value)}
