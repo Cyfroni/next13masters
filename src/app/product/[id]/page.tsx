@@ -10,7 +10,10 @@ import {
 import { Product } from "@/components/product";
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
-	const { product } = await executeGraphql(ProductGetByIdDocument, { id: params.id });
+	const { product } = await executeGraphql({
+		query: ProductGetByIdDocument,
+		variables: { id: params.id },
+	});
 
 	return {
 		title: product?.name,
@@ -18,7 +21,7 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
 }
 
 export async function generateStaticParams() {
-	const { products } = await executeGraphql(ProductsGetListDocument, {});
+	const { products } = await executeGraphql({ query: ProductsGetListDocument });
 
 	return products.map((product) => ({
 		params: { id: product.id },
@@ -26,14 +29,20 @@ export async function generateStaticParams() {
 }
 
 export default async function Page({ params }: { params: { id: string } }) {
-	const { product } = await executeGraphql(ProductGetByIdDocument, { id: params.id });
+	const { product } = await executeGraphql({
+		query: ProductGetByIdDocument,
+		variables: { id: params.id },
+	});
 
 	if (!product) {
 		return notFound();
 	}
 
-	const { productSizeColorVariants } = await executeGraphql(VariantsGetForProductDocument, {
-		id: params.id,
+	const { productSizeColorVariants } = await executeGraphql({
+		query: VariantsGetForProductDocument,
+		variables: {
+			id: params.id,
+		},
 	});
 
 	return (
@@ -62,7 +71,10 @@ export default async function Page({ params }: { params: { id: string } }) {
 }
 
 async function RelatedProducts() {
-	const { products } = await executeGraphql(ProductsGetListDocument, { first: 4 });
+	const { products } = await executeGraphql({
+		query: ProductsGetListDocument,
+		variables: { first: 4 },
+	});
 
 	return (
 		<aside className="flex items-center justify-center">

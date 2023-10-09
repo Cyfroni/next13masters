@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
 import type { Metadata } from "next";
+import { revalidatePath } from "next/cache";
 import { ActiveLink } from "../components/activeLink";
 import { QuerySeachInput } from "@/components/querySearchInput";
 import { executeGraphql } from "@/api/grapgql";
@@ -17,8 +18,8 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	const createCart = async () => {
 		"use server";
-		console.log("createCart");
-		return executeGraphql(CartCreateDocument);
+		console.log("createCarttaa");
+		await executeGraphql({ query: CartCreateDocument, cache: "no-store" });
 	};
 
 	return (
@@ -50,6 +51,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 					<form action={createCart} className="ml-10 flex items-center">
 						<AddCartButton />
 					</form>
+					{/* <AddCartForm /> */}
 				</header>
 				<main className="flex min-h-screen items-center justify-center">{children}</main>
 			</body>

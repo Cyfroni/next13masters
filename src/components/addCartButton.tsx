@@ -1,6 +1,7 @@
 "use client";
 
 import { experimental_useFormStatus as useFormStatus } from "react-dom";
+import { createCartMutation } from "@/api/mutations";
 
 export function AddCartButton() {
 	const { pending } = useFormStatus();
@@ -13,5 +14,13 @@ export function AddCartButton() {
 		>
 			Create Cart
 		</button>
+	);
+}
+
+export function AddCartForm() {
+	return (
+		<form action={createCartMutation} className="ml-10 flex items-center">
+			<AddCartButton />
+		</form>
 	);
 }

@@ -1,5 +1,11 @@
 mutation CartCreate {
-	createOrder(data: { total: 5 }) {
+	createOrder(data: { total: 7, email: "karol@wp.pl" }) {
 		id
+		stage
+		email
+		createdBy {
+			name
+		}
+		createdAt
 	}
 }

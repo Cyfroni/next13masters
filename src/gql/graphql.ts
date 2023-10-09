@@ -10718,7 +10718,7 @@ export type _SystemDateTimeFieldVariation =
 export type CartCreateMutationVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CartCreateMutation = { createOrder?: { id: string } | null };
+export type CartCreateMutation = { createOrder?: { id: string, stage: Stage, email?: string | null, createdAt: unknown, createdBy?: { name: string } | null } | null };
 
 export type CollectionGetListQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -10801,8 +10801,14 @@ export const ProductListItemFragmentDoc = new TypedDocumentString(`
     `, {"fragmentName":"ProductListItem"}) as unknown as TypedDocumentString<ProductListItemFragment, unknown>;
 export const CartCreateDocument = new TypedDocumentString(`
     mutation CartCreate {
-  createOrder(data: {total: 0}) {
+  createOrder(data: {total: 7, email: "karol@wp.pl"}) {
     id
+    stage
+    email
+    createdBy {
+      name
+    }
+    createdAt
   }
 }
     `) as unknown as TypedDocumentString<CartCreateMutation, CartCreateMutationVariables>;

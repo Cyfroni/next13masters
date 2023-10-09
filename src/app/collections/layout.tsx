@@ -3,7 +3,7 @@ import { CollectionGetListDocument } from "@/gql/graphql";
 import { ActiveLink } from "@/components/activeLink";
 
 export default async function Layout({ children }: { children: React.ReactNode }) {
-	const { collections } = await executeGraphql(CollectionGetListDocument);
+	const { collections } = await executeGraphql({ query: CollectionGetListDocument });
 
 	return (
 		<div>

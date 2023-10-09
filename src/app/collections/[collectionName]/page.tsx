@@ -8,8 +8,11 @@ export async function generateMetadata({
 }: {
 	params: { collectionName: string };
 }) {
-	const { collections } = await executeGraphql(CollectionGetBySlugDocument, {
-		slug: collectionName,
+	const { collections } = await executeGraphql({
+		query: CollectionGetBySlugDocument,
+		variables: {
+			slug: collectionName,
+		},
 	});
 
 	if (!collections) {
@@ -28,8 +31,11 @@ export default async function Page({
 }: {
 	params: { collectionName: string };
 }) {
-	const { collections } = await executeGraphql(CollectionGetBySlugDocument, {
-		slug: collectionName,
+	const { collections } = await executeGraphql({
+		query: CollectionGetBySlugDocument,
+		variables: {
+			slug: collectionName,
+		},
 	});
 
 	if (!collections) {

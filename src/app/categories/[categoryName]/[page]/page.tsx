@@ -7,9 +7,12 @@ export default async function Page({
 }: {
 	params: { categoryName: string; page: string };
 }) {
-	const { categories } = await executeGraphql(ProductsGetListByCategoryDocument, {
-		slug: categoryName,
-		skip: (parseInt(page) - 1) * 2,
+	const { categories } = await executeGraphql({
+		query: ProductsGetListByCategoryDocument,
+		variables: {
+			slug: categoryName,
+			skip: (parseInt(page) - 1) * 2,
+		},
 	});
 
 	const products = categories[0]?.products;

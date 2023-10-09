@@ -3,8 +3,11 @@ import { Product } from "@/components/product";
 import { ProductGetByQueryDocument } from "@/gql/graphql";
 
 export default async function Page({ searchParams }: { searchParams: { query?: string } }) {
-	const { products } = await executeGraphql(ProductGetByQueryDocument, {
-		query: searchParams.query || "",
+	const { products } = await executeGraphql({
+		query: ProductGetByQueryDocument,
+		variables: {
+			query: searchParams.query || "",
+		},
 	});
 
 	if (products.length === 0) {
