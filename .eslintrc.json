@@ -69,6 +69,16 @@
 		"@typescript-eslint/restrict-template-expressions": [
 			"error",
 			{ "allowNumber": true, "allowBoolean": true }
+		],
+
+		"@typescript-eslint/no-misused-promises": ["error", { "checksVoidReturn": false }],
+
+		"no-restricted-imports": [
+			"error",
+			{
+				"name": "next/router",
+				"message": "Please use `next/navigation` instead."
+			}
 		]
 	},
 	"overrides": [

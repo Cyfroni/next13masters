@@ -3,6 +3,9 @@ import { Inter } from "next/font/google";
 import type { Metadata } from "next";
 import { ActiveLink } from "../components/activeLink";
 import { QuerySeachInput } from "@/components/querySearchInput";
+import { executeGraphql } from "@/api/grapgql";
+import { CartCreateDocument } from "@/gql/graphql";
+import { AddCartButton } from "@/components/addCartButton";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -12,6 +15,12 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+	const createCart = async () => {
+		"use server";
+		console.log("createCart");
+		return executeGraphql(CartCreateDocument);
+	};
+
 	return (
 		<html lang="en">
 			<body className={inter.className}>
@@ -38,6 +47,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 					<div className="ml-auto flex items-center">
 						<QuerySeachInput />
 					</div>
+					<form action={createCart} className="ml-10 flex items-center">
+						<AddCartButton />
+					</form>
 				</header>
 				<main className="flex min-h-screen items-center justify-center">{children}</main>
 			</body>
