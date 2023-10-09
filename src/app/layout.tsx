@@ -1,7 +1,6 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
 import type { Metadata } from "next";
-import { revalidatePath } from "next/cache";
 import { ActiveLink } from "../components/activeLink";
 import { QuerySeachInput } from "@/components/querySearchInput";
 import { executeGraphql } from "@/api/grapgql";
